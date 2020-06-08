@@ -1,2 +1,7 @@
-ansible_user: 'deploy'
-ansible_port: 2525
+# it-migration job service Deploy
+
+backup_path: '/opt/iTransRevamp/{{ instance }}/backup'
+deployment_path: '/opt/iTransRevamp/{{ instance }}'
+source_path: '/var/lib/jenkins/workspace/{{ jenkins_job }}/migration-job/target'
+prefix: ' '
+service_name: '{{ instance }}'
