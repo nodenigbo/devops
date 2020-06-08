@@ -1,0 +1,41 @@
+-
+    hosts: linux
+    become: true
+    vars:
+        app_name: '{{ instance }}'
+    tasks:
+        -
+            name: 'Include variable file'
+            include_vars: {file: 'vars/artifact.yml'}
+        -
+            name: 'Create backup directory if it doesn''t exist'
+            file: {path: '{{ backup_path }}', state: directory}
+            ignore_errors: yes
+        -
+             name: 'backup the existing artifact build'
+             copy: {src: '{{ deployment_path }}/{{ jenkins_job }}.jar', dest: '{{ backup_path }}/{{ jenkins_job }}.jar', remote_src: true}
+             ignore_errors: yes
+        -
+            name: '(itransrevamp) Stop service'
+            service: 'name={{ service_name }} state=stopped'
+            ignore_errors: yes
+        -
+            name: 'Remove a build, if present'
+            file:
+                path: '{{ deployment_path }}/{{ jenkins_job }}.jar'
+                state: absent
+        -
+            name: 'deploy the artifact to the deployment folder'
+            copy:
+                src: '{{ source_path }}/{{ jenkins_job }}.jar'
+                dest: '{{ deployment_path }}/{{ jenkins_job }}.jar'
+       
+        -   name: 'start itransrevamp service'
+            service: 'name={{ service_name }} state=started'
+
+      #  -
+      #      name: 'confirm the build is deployed'
+      #      wait_for:
+      #          path: '{{ deployment_path }}\{{ current_component }}.war.deployed'
+      #          timeout: 120
+      #          poll: 1
