@@ -14,41 +14,13 @@
   tasks:
   - name: Include variable file
     include_vars:
-      file: 'vars/artifact.yml'
+      file: 'vars/artifacts.yml'
 
   - name: Create backup directory if it doesn't exist
-    win_file:
-      path: '{{ backup_path }}'
-      state: directory
+    file: {path: '{{ backup_path }}', state: directory}
     ignore_errors: yes
+  
 
-  - name: backup the existing artifact build
-    win_copy:
-      src: '{{ deployment_path }}\{{ current_component }}.war'
-      dest: '{{ backup_path }}\{{ current_component }}.war'
-      remote_src: True
-    ignore_errors: yes
-
-  - name: Remove a build, if present
-    win_file:
-      path: '{{ deployment_path }}\{{ current_component }}.war'
-      state: absent
-
-  - name: Remove the .deployed file, if present
-    win_file:
-      path: '{{ deployment_path }}\{{ current_component }}.war.deployed'
-      state: absent  
-
-  - name: deploy the artifact to the deployment folder
-    win_copy:
-      src: '{{ source_path }}/{{ current_component }}.war'
-      dest: '{{ deployment_path }}\{{ current_component }}.war'
-
-  - name: confirm the build is deployed
-    win_wait_for:
-      path: '{{ deployment_path }}\{{ current_component }}.war.deployed'
-      timeout: 120
-    poll: 1
   
 
   
