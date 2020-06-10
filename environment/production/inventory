@@ -3,9 +3,4 @@
 
 13.57.154.196  ansible_port=2525
 
-remote_user = deploy
-
-private_key_file = /home/deploy/.ssh/id_rsa
-
-host_key_checking = False
 
