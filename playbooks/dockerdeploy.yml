@@ -2,7 +2,7 @@
 
 ---
 
-- hosts: windows
+- hosts: linux
   strategy: free
   serial: 10
   become_method: runas
