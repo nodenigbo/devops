@@ -15,10 +15,10 @@
       include_vars:
         file: 'vars/artifacts.yml'
    
-    volumes:
-    - name: docker
-      host:
-        path: /var/run/docker.sock
+    #volumes:
+    #- name: docker
+      #host:
+        #path: /var/run/docker.sock
 
     steps:
     - name: Pull build-container-ansible
