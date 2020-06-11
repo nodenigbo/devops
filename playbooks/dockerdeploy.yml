@@ -15,7 +15,7 @@
       include_vars:
         file: 'vars/artifacts.yml'
         
-    - name: Pull build-container-ansible
+    #- name: Pull build-container-ansible
       #image: docker.io/mludvig/docker-builder
       volumes:
       - name: docker
