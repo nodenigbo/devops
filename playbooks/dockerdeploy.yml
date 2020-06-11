@@ -14,13 +14,7 @@
     - name: Include variable file
       include_vars:
         file: 'vars/artifacts.yml'
-   
-    #volumes:
-    #- name: docker
-      #host:
-        #path: /var/run/docker.sock
-
-    #steps:
+        
     - name: Pull build-container-ansible
       image: docker.io/mludvig/docker-builder
       volumes:
@@ -29,6 +23,15 @@
       commands:
       - aws sts assume-role --role-arn "arn:aws:iam::834824061954:role/AfrintelECRRole" --role-session-name afrintel | sh
       - aws ecr get-login-password | docker login -u AWS --password-stdin "https://$(aws sts get-caller-identity --query 'Account' --output text).dkr.ecr.us-east-1.amazonaws.com"
+   
+    #volumes:
+    #- name: docker
+      #host:
+        #path: /var/run/docker.sock
+
+    #steps:
+    
+      
   #- aws --region ap-southeast-2 ecr get-login --no-include-email --registry-ids 123456789012 | sh
   #- docker pull 123456789012.dkr.ecr.ap-southeast-2.amazonaws.com/build-container-ansible:latest
   #- docker images
