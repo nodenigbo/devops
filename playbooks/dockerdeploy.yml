@@ -20,7 +20,7 @@
       #host:
         #path: /var/run/docker.sock
 
-    steps:
+    #steps:
     - name: Pull build-container-ansible
       image: docker.io/mludvig/docker-builder
       volumes:
