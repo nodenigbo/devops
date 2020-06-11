@@ -1,11 +1,11 @@
 # This playbook is responsible for deploying Bioregistra Artifacts to the staging and test environments.
 
----
+#---
   - hosts: linux
-  strategy: free
-  serial: 10
-  become_method: runas
-  gather_facts: false
+    strategy: free
+    serial: 10
+    become_method: runas
+    gather_facts: false
   
   vars:
     app_name: '{{ instance }}'
