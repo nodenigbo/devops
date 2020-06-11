@@ -16,7 +16,7 @@
         file: 'vars/artifacts.yml'
         
     - name: Pull build-container-ansible
-      image: docker.io/mludvig/docker-builder
+      #image: docker.io/mludvig/docker-builder
       volumes:
       - name: docker
       path: /var/run/docker.sock
